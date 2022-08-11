@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lab 4 - Pablo Zamora</string>
+    <string name="week_day">Viernes</string>
+    <string name="date">18 de mayo</string>
+    <string name="end_day">Terminar jornada</string>
+    <string name="fav_restaurant">Buta Ramen</string>
+    <string name="fav_restaurant_address">La Estación, 16 Calle 7-17, zona 10</string>
+    <string name="fav_restaurant_attention_hours">10:00 AM - 9:00 PM</string>
+    <string name="start">Iniciar</string>
+</resources>
