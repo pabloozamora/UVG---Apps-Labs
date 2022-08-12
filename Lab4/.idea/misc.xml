@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Apps/Lab4/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Apps/Labs/Lab4/app/src/main/res/drawable/background_round.xml" value="0.2215" />
+        <entry key="..\:/Apps/Labs/Lab4/app/src/main/res/drawable/ic_directions.xml" value="0.2085" />
+        <entry key="..\:/Apps/Labs/Lab4/app/src/main/res/drawable/ic_update.xml" value="0.2215" />
+        <entry key="..\:/Apps/Labs/Lab4/app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>
   </component>
