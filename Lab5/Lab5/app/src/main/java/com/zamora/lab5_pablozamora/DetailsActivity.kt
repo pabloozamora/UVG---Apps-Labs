@@ -23,12 +23,14 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var startVisit: Button
     private lateinit var rootLayout: ConstraintLayout
     private lateinit var btnCall: TextView
+    private lateinit var phoneNum: TextView
+    private lateinit var restaurant: Restaurant
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val restaurant: Restaurant = intent.getSerializableExtra("EXTRA_RESTAURANT") as Restaurant
+        restaurant= intent.getSerializableExtra("EXTRA_RESTAURANT") as Restaurant
 
         rootLayout = findViewById(R.id.rootLayout)
         startVisit = findViewById(R.id.start_button)
@@ -46,16 +48,21 @@ class DetailsActivity : AppCompatActivity() {
         restaurantOfficeHours = findViewById(R.id.restaurant_office_hours)
         restaurantOfficeHours.text = restaurant.office_hours
 
+        //Teléfono del restaurante
+        phoneNum = findViewById(R.id.phone_num)
+        phoneNum.text = restaurant.phone_number
+
         initListeners()
     }
 
     private fun initListeners(){
+
         startVisit.setOnClickListener{
             checkCameraPermission()
         }
 
         btnCall.setOnClickListener{
-            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "@string/phone_number"))
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + restaurant.phone_number))
             startActivity(intent)
         }
     }

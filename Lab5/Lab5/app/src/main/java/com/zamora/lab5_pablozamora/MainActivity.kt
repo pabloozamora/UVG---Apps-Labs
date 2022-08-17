@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity() {
             val restaurant = Restaurant(
                 name = restaurantName.text.toString(),
                 address = restaurantAddress.text.toString(),
-                office_hours = restaurantOfficeHours.text.toString()
+                office_hours = restaurantOfficeHours.text.toString(),
+                phone_number = "4058 7520"
             )
 
             val intent = Intent(this,DetailsActivity::class.java)
