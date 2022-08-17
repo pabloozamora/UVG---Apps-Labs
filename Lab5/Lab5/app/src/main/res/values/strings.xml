@@ -10,4 +10,10 @@
     <string name="details">Detalles</string>
     <string name="update_available">Actualización disponible</string>
     <string name="download_update">Descargar</string>
+    <string name="additional_info">Información adicional</string>
+    <string name="office_hours">Horario de atención</string>
+    <string name="phone_number">Teléfono</string>
+    <string name="fav_restaurant_phone_num">4058 7520</string>
+    <string name="call">Llamar</string>
+    <string name="start_visit">Iniciar visita</string>
 </resources>
