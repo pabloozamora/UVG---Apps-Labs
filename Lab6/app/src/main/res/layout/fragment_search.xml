@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Search"
+        android:text="@string/search"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
@@ -33,17 +33,17 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
-        android:text="Your top genres"
+        android:text="@string/top_genres"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/genre1_card"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/genres_height"
         android:layout_marginTop="15dp"
         android:background="@drawable/genre_layout_bg"
         android:layout_marginStart="15dp"
@@ -59,7 +59,7 @@
             android:padding="10dp"
             android:text="@string/genre1"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="@dimen/genre_title"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +70,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/genre2_card"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/genres_height"
         android:layout_margin="15dp"
         android:background="@drawable/genre_layout_bg"
         android:backgroundTint="@color/regaaeton_genre_bg_color"
@@ -84,7 +84,7 @@
             android:padding="10dp"
             android:text="@string/genre2"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="@dimen/genre_title"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/genre3_card"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/genres_height"
         android:layout_marginTop="15dp"
         android:background="@drawable/genre_layout_bg"
         android:layout_marginStart="15dp"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:text="@string/genre3"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="@dimen/genre_title"
             android:textStyle="bold"
             android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/genre4_card"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/genres_height"
         android:layout_margin="15dp"
         android:background="@drawable/genre_layout_bg"
         android:backgroundTint="@color/pop_genre_bg_color"
@@ -133,7 +133,7 @@
             android:padding="10dp"
             android:text="@string/genre4"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="@dimen/genre_title"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
