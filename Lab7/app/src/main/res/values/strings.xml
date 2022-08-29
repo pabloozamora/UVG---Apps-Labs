@@ -2,4 +2,14 @@
     <string name="app_name">Lab7</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_message">¡Buenos días!</string>
+    <string name="update_profile">Actualizar perfil</string>
+    <string name="signUp_text">¿Nuevo usuario? ¡Crea tu cuenta aquí!</string>
+    <string name="login_text">Iniciar sesión</string>
+    <string name="login_title">Laboratorio 7</string>
+    <string name="signUp_title">Nueva Cuenta</string>
+    <string name="textBoxHint_email">Ingresa tu correo</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="update_text">Actualizar</string>
+    <string name="profile_title">Mi Perfil</string>
 </resources>
