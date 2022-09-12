@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.loadAny
+import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import com.zamora.lab8.R
 import com.zamora.lab8.database.Character
@@ -35,6 +36,8 @@ class CharacterAdapter(private val dataSet: MutableList<Character>,
             imageType.load(character.image){
                 transformations(CircleCropTransformation())
                 error(R.drawable.ic_error)
+                diskCachePolicy(CachePolicy.DISABLED)
+                memoryCachePolicy(CachePolicy.DISABLED)
             }
             layoutCharacter.setOnClickListener{
                 listener.onCharacterClicked(character)
