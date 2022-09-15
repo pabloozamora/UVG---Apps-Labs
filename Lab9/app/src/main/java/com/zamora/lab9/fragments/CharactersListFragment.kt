@@ -3,6 +3,7 @@ package com.zamora.lab9.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,14 +57,15 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
                 response: Response<AllCharactersResponse>
             ){
                 if (response.isSuccessful){
-                    println("success")
+                    println("Successfully obtained characters list")
                     charactersList = response.body()!!.results
                     setuUpRecycler()
                 }
             }
 
             override fun onFailure(call: Call<AllCharactersResponse>, t: Throwable) {
-                print("error")
+                println("Connection failed")
+                Toast.makeText(activity, "No fue posible obtener la lista de personajes. Revisa tu conexión a internet.", Toast.LENGTH_LONG).show()
             }
         })
     }

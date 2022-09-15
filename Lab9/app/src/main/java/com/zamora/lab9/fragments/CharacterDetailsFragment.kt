@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import coil.load
 import coil.request.CachePolicy
@@ -47,14 +48,15 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
                 response: Response<Character>
             ){
                 if (response.isSuccessful){
-                    println("success")
+                    println("Character Details obtained successfully")
                     characterDisplayed = response.body()!!
                     setUpCharacter()
                 }
             }
 
             override fun onFailure(call: Call<Character>, t: Throwable) {
-                print("error")
+                println("Connection failed")
+                Toast.makeText(activity, "No fue posible obtener los detalles del personaje. Revisa tu conexión a internet.", Toast.LENGTH_LONG).show()
             }
         })
     }
