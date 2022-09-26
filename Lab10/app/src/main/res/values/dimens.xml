@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="character_icon_size">40dp</dimen>
+    <dimen name="list_item_with_icon_height">72dp</dimen>
+    <dimen name="character_details_side_margin">60dp</dimen>
+    <dimen name="character_details_top_margin">10dp</dimen>
+    <dimen name="character_details_name_size">25sp</dimen>
+    <dimen name="character_recycler_item_margin">16dp</dimen>
+    <dimen name="character_recycler_item_name_size">16sp</dimen>
+    <dimen name="login_logo_dimensions">256dp</dimen>
+    <dimen name="login_margin">20dp</dimen>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/sort_az_button"
+    android:icon="@drawable/ic_menu"
+    android:title="Ordenar A-Z"/>
+
+    <item
+        android:id="@+id/sort_za_button"
+        android:icon="@drawable/ic_menu"
+        android:title="Ordenar Z-A"/>
+
+    <item
+        android:id="@+id/logout_button"
+        android:icon="@drawable/ic_menu"
+        android:title="Cerrar sesión"/>
+</menu>
