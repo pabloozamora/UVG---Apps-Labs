@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Lab11</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="species_text">Species</string>
+    <string name="status_text">Status</string>
+    <string name="gender_text">Gender</string>
+    <string name="origin_text">Origin</string>
+    <string name="appearances_text">Episode appearances</string>
+    <string name="email_title">Correo</string>
+    <string name="pass_title">Contraseña</string>
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_email">zam21780@uvg.edu.gt</string>
+    <string name="update">Actualizar</string>
+    <string name="delete">Eliminar</string>
+    <string name="sort_a_z">Ordenar A-Z</string>
+    <string name="sort_z_a">Ordenar Z-A</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="name_text">Name</string>
+    <string name="episodes_text">Episodes</string>
+</resources>
