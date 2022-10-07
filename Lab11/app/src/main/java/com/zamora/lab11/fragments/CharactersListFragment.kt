@@ -41,19 +41,15 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
 
         recyclerView = view.findViewById(R.id.recycler_characters_list)
         toolBar = requireActivity().findViewById(R.id.toolbar_main_activity)
+        characterEntitiesList = ArrayList()
         database = Room.databaseBuilder(
             requireContext(),
             Database::class.java,
             "bdname"
         ).build()
 
-        if (characterEntitiesList.isEmpty()){
-            connectToApi()
-        }
-        else{
-            getCharacters()
-        }
 
+        getCharacters()
         setUpListeners()
     }
 
@@ -61,11 +57,11 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
         toolBar.setOnMenuItemClickListener { item ->
             when(item.itemId){
                 R.id.sort_az_button -> {
-                    charactersList.sortBy { character -> character.name }
+                    characterEntitiesList.sortBy { character -> character.name }
                     adapter.notifyDataSetChanged()
                 }
                 R.id.sort_za_button ->{
-                    charactersList.sortByDescending { character -> character.name }
+                    characterEntitiesList.sortByDescending { character -> character.name }
                     adapter.notifyDataSetChanged()
                 }
                 R.id.logout_button ->{
@@ -77,7 +73,12 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
                     }
                 }
                 R.id.sync_button ->{
-                    connectToApi()
+                    CoroutineScope(Dispatchers.IO).launch{
+                        database.characterDao().deleteAllCharacters()
+                    }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        connectToApi()
+                    }
                 }
             }
 
@@ -86,6 +87,7 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
     }
 
     private fun connectToApi() {
+        characterEntitiesList.clear()
         RetrofitInstance.api.getCharacters().enqueue(object : Callback<AllCharactersResponse> {
             override fun onResponse(
                 call: Call<AllCharactersResponse>,
@@ -110,6 +112,9 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
                             database.characterDao().createCharacter(character)
                         }
                     }
+                    CoroutineScope(Dispatchers.Main).launch{
+                        setUpRecycler()
+                    }
                 }
             }
 
@@ -121,14 +126,21 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
     }
 
     private fun getCharacters(){
-        characterEntitiesList.clear()
         CoroutineScope(Dispatchers.IO).launch {
-            characterEntitiesList = database.characterDao().getAllCharacters()
-        }
-        CoroutineScope(Dispatchers.Main).launch{
-            setUpRecycler()
+            val characters = database.characterDao().getAllCharacters()
+            if (characters.isEmpty()){
+                connectToApi()
+            }
+            else{
+                characterEntitiesList.clear()
+                characterEntitiesList.addAll(characters)
+                CoroutineScope(Dispatchers.Main).launch {
+                    setUpRecycler()
+                }
+            }
         }
     }
+
 
     private fun setUpRecycler() {
         adapter = CharacterAdapter(characterEntitiesList, this@CharactersListFragment)
@@ -151,8 +163,15 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
         requireContext().dataStore.edit { settings ->
             settings[dataStoreKey] = "empty"
         }
-        val action = CharactersListFragmentDirections.actionCharactersListFragmentToLoginFragment()
-        requireView().findNavController().navigate(action)
+
+        CoroutineScope(Dispatchers.IO).launch{
+            database.characterDao().deleteAllCharacters()
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val action = CharactersListFragmentDirections.actionCharactersListFragmentToLoginFragment()
+            requireView().findNavController().navigate(action)
+        }
     }
 
 }

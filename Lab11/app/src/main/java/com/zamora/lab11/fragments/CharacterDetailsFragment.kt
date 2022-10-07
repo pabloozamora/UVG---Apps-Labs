@@ -56,11 +56,20 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
         characterOrigin = view.findViewById(R.id.textInput_characterDetailsFragment_origin)
         characterAppearances = view.findViewById(R.id.textInput_characterDetailsFragment_episodes)
         saveButton = view.findViewById(R.id.button_characterDetailsFragment_saveChanges)
+        toolBar = requireActivity().findViewById(R.id.toolbar_main_activity)
         database = Room.databaseBuilder(
             requireContext(),
             Database::class.java,
             "bdname"
         ).build()
+        setUpListeners()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            characterDisplayed = database.characterDao().getCharacter(args.id)
+            CoroutineScope(Dispatchers.Main).launch {
+                setUpCharacter()
+            }
+        }
 
     }
 
@@ -78,21 +87,21 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
         }
 
         saveButton.setOnClickListener {
-            val episodesInt = Integer.parseInt(characterAppearances.editText.toString())
             val updatedCharacter = characterDisplayed.copy(
-                name = characterName.editText.toString(),
-                species = characterSpecies.editText.toString(),
-                status = characterStatus.editText.toString(),
-                gender = characterGender.editText.toString(),
-                origin = characterOrigin.editText.toString(),
-                episodes = episodesInt
+                name = characterName.editText!!.text.toString(),
+                species = characterSpecies.editText!!.text.toString(),
+                status = characterStatus.editText!!.text.toString(),
+                gender = characterGender.editText!!.text.toString(),
+                origin = characterOrigin.editText!!.text.toString(),
+                episodes = characterAppearances.editText!!.text.toString().toInt()
             )
+            characterDisplayed = updatedCharacter
             CoroutineScope(Dispatchers.IO).launch {
                 database.characterDao().updateCharacter(updatedCharacter)
-            }
-            CoroutineScope(Dispatchers.Main).launch {
-                Toast.makeText(activity, "Datos de personaje actualizados", Toast.LENGTH_LONG).show()
-                setUpCharacter()
+                CoroutineScope(Dispatchers.Main).launch {
+                    Toast.makeText(activity, "Datos de personaje actualizados", Toast.LENGTH_LONG).show()
+                    setUpCharacter()
+                }
             }
         }
     }
@@ -136,10 +145,6 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
     }
 
     private fun setUpCharacter() {
-
-        CoroutineScope(Dispatchers.IO).launch {
-            characterDisplayed = database.characterDao().getCharacter(args.id)
-        }
 
         characterImage.load(characterDisplayed.image){
             transformations(CircleCropTransformation())
