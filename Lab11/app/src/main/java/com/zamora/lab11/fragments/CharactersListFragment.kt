@@ -18,6 +18,9 @@ import retrofit2.Response
 import com.zamora.lab11.datasource.model.Character
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.room.Room
+import com.zamora.lab11.datasource.localsource.Database
+import com.zamora.lab11.datasource.model.CharacterEntity
 import com.zamora.lab11.fragments.LoginFragment.Companion.dataStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,13 +32,28 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
     private lateinit var toolBar: MaterialToolbar
     private lateinit var charactersList: MutableList<Character>
     private lateinit var adapter: CharacterAdapter
+    private lateinit var entity: CharacterEntity
+    private lateinit var database: Database
+    private lateinit var characterEntitiesList: MutableList<CharacterEntity>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recycler_characters_list)
         toolBar = requireActivity().findViewById(R.id.toolbar_main_activity)
-        connectToApi()
+        database = Room.databaseBuilder(
+            requireContext(),
+            Database::class.java,
+            "bdname"
+        ).build()
+
+        if (characterEntitiesList.isEmpty()){
+            connectToApi()
+        }
+        else{
+            getCharacters()
+        }
+
         setUpListeners()
     }
 
@@ -51,9 +69,15 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
                     adapter.notifyDataSetChanged()
                 }
                 R.id.logout_button ->{
+                    CoroutineScope(Dispatchers.IO).launch{
+                        database.characterDao().deleteAllCharacters()
+                    }
                     CoroutineScope(Dispatchers.Main).launch {
                         logout()
                     }
+                }
+                R.id.sync_button ->{
+                    connectToApi()
                 }
             }
 
@@ -70,7 +94,22 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
                 if (response.isSuccessful){
                     println("Successfully obtained characters list")
                     charactersList = response.body()!!.results
-                    setUpRecycler()
+                    for (character in charactersList){
+                        entity = CharacterEntity(character.id,
+                            character.name,
+                            character.species,
+                            character.status,
+                            character.gender,
+                            character.origin.name,
+                            character.episode.size,
+                            character.image)
+                        characterEntitiesList.add(entity)
+                    }
+                    CoroutineScope(Dispatchers.IO).launch {
+                        for (character in characterEntitiesList){
+                            database.characterDao().createCharacter(character)
+                        }
+                    }
                 }
             }
 
@@ -81,14 +120,25 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
         })
     }
 
+    private fun getCharacters(){
+        characterEntitiesList.clear()
+        CoroutineScope(Dispatchers.IO).launch {
+            characterEntitiesList = database.characterDao().getAllCharacters()
+        }
+        CoroutineScope(Dispatchers.Main).launch{
+            setUpRecycler()
+        }
+    }
+
     private fun setUpRecycler() {
-        adapter = CharacterAdapter(charactersList, this)
+        adapter = CharacterAdapter(characterEntitiesList, this@CharactersListFragment)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
+
     }
 
-    override fun onCharacterClicked(character: Character) {
+    override fun onCharacterClicked(character: CharacterEntity) {
         val action = CharactersListFragmentDirections.actionCharactersListFragmentToCharacterDetailsFragment2(
             character.id
         )

@@ -12,8 +12,9 @@ import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import com.zamora.lab11.R
 import com.zamora.lab11.datasource.model.Character
+import com.zamora.lab11.datasource.model.CharacterEntity
 
-class CharacterAdapter(private val dataSet: MutableList<Character>,
+class CharacterAdapter(private val dataSet: MutableList<CharacterEntity>,
                        private val listener: RecyclerCharacterClickHandler
                         ) : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
@@ -26,7 +27,7 @@ class CharacterAdapter(private val dataSet: MutableList<Character>,
         private val textStatus: TextView = view.findViewById(R.id.status_itemCharacter)
         private val layoutCharacter: ConstraintLayout = view.findViewById(R.id.layout_itemCharacter)
 
-        fun setData(character: Character){
+        fun setData(character: CharacterEntity){
             textName.text = character.name
             textSpecies.text = character.species
             textStatus.text = character.status
@@ -43,7 +44,7 @@ class CharacterAdapter(private val dataSet: MutableList<Character>,
     }
 
     interface RecyclerCharacterClickHandler{
-        fun onCharacterClicked(character: Character)
+        fun onCharacterClicked(character: CharacterEntity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

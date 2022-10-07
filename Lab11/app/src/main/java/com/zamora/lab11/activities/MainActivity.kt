@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                     toolBar.visibility = View.GONE
                     toolBar.menu.clear()
                 }
-                R.id.charactersListFragment {
+                R.id.charactersListFragment ->{
                     toolBar.visibility = View.VISIBLE
                     toolBar.menu.clear()
                     toolBar.inflateMenu(R.menu.top_bar_menu)
