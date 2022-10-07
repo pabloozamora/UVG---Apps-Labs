@@ -87,13 +87,13 @@ class CharactersListFragment : Fragment(R.layout.fragment_characters_list), Char
     }
 
     private fun connectToApi() {
-        characterEntitiesList.clear()
         RetrofitInstance.api.getCharacters().enqueue(object : Callback<AllCharactersResponse> {
             override fun onResponse(
                 call: Call<AllCharactersResponse>,
                 response: Response<AllCharactersResponse>
             ){
                 if (response.isSuccessful){
+                    characterEntitiesList.clear()
                     println("Successfully obtained characters list")
                     charactersList = response.body()!!.results
                     for (character in charactersList){
