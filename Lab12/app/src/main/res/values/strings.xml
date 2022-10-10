@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab12</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_title">Correo</string>
+    <string name="pass_title">Contraseña</string>
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_email">zam21780@uvg.edu.gt</string>
+</resources>

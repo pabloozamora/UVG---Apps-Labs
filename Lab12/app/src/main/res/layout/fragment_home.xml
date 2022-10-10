@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HomeFragment"
+    android:padding="5dp">
+
+    <Button
+        android:id="@+id/button_homeFragment_keepSessionActive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Mantener sesión activa"
+        android:textSize="12sp"/>
+
+    <Button
+        android:id="@+id/button_homeFragment_logOut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_homeFragment_keepSessionActive"
+        android:text="Cerrar Sesión"
+        android:textSize="12sp"/>
+
+    <Button
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:id="@+id/button_homeFragment_default"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_homeFragment_logOut"
+        app:layout_constraintEnd_toStartOf="@id/button_homeFrament_success"
+        android:text="Default"
+        android:textSize="12sp"
+        android:layout_marginEnd="5dp"/>
+
+    <Button
+        android:id="@+id/button_homeFrament_success"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/button_homeFragment_default"
+        app:layout_constraintTop_toBottomOf="@+id/button_homeFragment_logOut"
+        app:layout_constraintEnd_toStartOf="@id/button_homeFragment_failure"
+        android:text="Success"
+        android:textSize="12sp"
+        android:layout_marginEnd="5dp"/>
+
+    <Button
+        android:id="@+id/button_homeFragment_failure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/button_homeFrament_success"
+        app:layout_constraintTop_toBottomOf="@+id/button_homeFragment_logOut"
+        app:layout_constraintEnd_toStartOf="@id/button_homeFragment_empty"
+        android:text="Failure"
+        android:textSize="12sp"
+        android:layout_marginEnd="5dp"/>
+
+    <Button
+        android:id="@+id/button_homeFragment_empty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_homeFragment_failure"
+        app:layout_constraintTop_toBottomOf="@+id/button_homeFragment_logOut"
+        android:text="Empty"
+        android:textSize="12sp"/>
+
+    <ImageView
+        app:layout_constraintVertical_chainStyle="packed"
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_homeFragment_failure"
+        app:layout_constraintBottom_toTopOf="@id/text_homeFragment_showText"
+        android:src="@drawable/ic_android_black"/>
+
+    <TextView
+        android:id="@+id/text_homeFragment_showText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione una opción"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
