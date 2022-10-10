@@ -15,9 +15,9 @@
         app:layout_constraintBottom_toTopOf="@id/emailInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="50sp"
+        android:textSize="@dimen/banner_text_size"
         android:layout_marginBottom="70dp"
-        android:text="Pablo Zamora"/>
+        android:text="@string/login_banner"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInput"
@@ -69,6 +69,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordInput" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_loginFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textLoginEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
 
 
     <TextView
