@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/charactersListFragment"
-        android:name="com.zamora.lab11.fragments.CharactersListFragment"
+        android:name="com.zamora.lab13.ui.character_list.CharactersListFragment"
         android:label="Characters"
         tools:layout="@layout/fragment_characters_list" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment2"
-        android:name="com.zamora.lab11.fragments.CharacterDetailsFragment"
+        android:name="com.zamora.lab13.ui.character_details.CharacterDetailsFragment"
         android:label="Character Details"
         tools:layout="@layout/fragment_character_details" >
         <argument
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.zamora.lab11.fragments.LoginFragment"
+        android:name="com.zamora.lab13.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
