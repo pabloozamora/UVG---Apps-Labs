@@ -1,26 +1,64 @@
 package com.zamora.lab13.datasource.repository
 
+import com.zamora.lab13.datasource.api.RickAndMortyAPI
+import com.zamora.lab13.datasource.localsource.CharacterDao
 import com.zamora.lab13.datasource.model.CharacterEntity
+import com.zamora.lab13.datasource.model.mapToModel
 import com.zamora.lab13.datasource.util.DataState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class CharacterRepositoryImpl: CharacterRepository {
-    override suspend fun getAll(): DataState<List<CharacterEntity>> {
-        TODO("Not yet implemented")
+class CharacterRepositoryImpl(
+    private val characterDao: CharacterDao,
+    private var api: RickAndMortyAPI
+): CharacterRepository {
+    override fun getAll(): Flow<DataState<List<CharacterEntity>>> = flow {
+        val localCharacters = characterDao.getAllCharacters()
+        if (localCharacters.isEmpty()){
+            try{
+                val remoteCharacters = api.getCharacters().results
+                val charactersToStore = remoteCharacters.map { dto -> dto.mapToModel() }
+                characterDao.insertAll(charactersToStore)
+                emit(DataState.Success(charactersToStore))
+            }catch (e: Exception){
+                emit(DataState.Error(e))
+            }
+        } else{
+            emit(DataState.Success(localCharacters))
+        }
     }
 
-    override suspend fun deleteAllCharacters() {
-        TODO("Not yet implemented")
+    override fun deleteAllCharacters(): Flow<DataState<Int>> = flow {
+        //Retornar Flow
+        //Emitir Loading
+        //Obtener cuantos registros se borraron
+        //Si se borraron mas de 0, success
+        //Si se borraron 0, error
     }
 
-    override suspend fun getCharacter(id: Int): DataState<CharacterEntity?> {
+    override fun getCharacter(id: Int): DataState<CharacterEntity?> {
         TODO("Not yet implemented")
+        //Retornar Flow
+        //Emitir Loading
+        //Obtener de base de datos
+        //Si no hay registro, error
+        //Si sí hay registro, update
+
     }
 
-    override suspend fun updateCharacter(character: CharacterEntity) {
-        TODO("Not yet implemented")
+    override fun updateCharacter(character: CharacterEntity) {
+        //Retornar Flow
+        //Emitir Loading
+        //Guardar en base de datos local
+        //Si retorna 0, error
+        //Si retorna 1, success
     }
 
-    override suspend fun deleteCharacter(id: Int) {
-        TODO("Not yet implemented")
+    override fun deleteCharacter(id: Int) {
+        //Retornar Flow
+        //Emitir Loading
+        //Borrar de base de datos local
+        //Si retorna 0, error
+        //Si retorna 1, success
     }
 }

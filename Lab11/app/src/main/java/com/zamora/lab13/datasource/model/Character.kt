@@ -14,3 +14,12 @@ data class Character(
     val type: String,
     val url: String
 )
+fun Character.mapToModel(): CharacterEntity = CharacterEntity(
+        id = id,
+        name = name,
+        species = species,
+        status = status,
+        gender = gender,
+        origin = origin.name,
+        episodes = episode.size,
+        image = image)

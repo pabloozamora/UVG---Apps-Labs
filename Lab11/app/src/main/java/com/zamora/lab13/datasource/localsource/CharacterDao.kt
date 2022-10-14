@@ -13,13 +13,16 @@ interface CharacterDao {
     suspend fun createCharacter(characterEntity: CharacterEntity)
 
     @Delete
-    suspend fun delete(characterEntity: CharacterEntity)
+    suspend fun delete(characterEntity: CharacterEntity): Int
 
     @Query("SELECT * FROM CharacterEntity WHERE id = :id")
     suspend fun getCharacter(id: Int): CharacterEntity
 
     @Query("SELECT name FROM CharacterEntity WHERE id = :id")
     suspend fun getCharacterName(id: Int): String
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(characters: List<CharacterEntity>)
 
     @Query("SELECT status FROM CharacterEntity WHERE id = :id")
     suspend fun getCharacterStatus(id: Int): String
@@ -28,6 +31,6 @@ interface CharacterDao {
     suspend fun updateCharacter(characterEntity: CharacterEntity)
 
     @Query("DELETE FROM characterEntity")
-    suspend fun deleteAllCharacters()
+    suspend fun deleteAllCharacters(): Int
 
 }
