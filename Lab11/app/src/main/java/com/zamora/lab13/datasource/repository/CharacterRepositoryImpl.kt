@@ -5,6 +5,7 @@ import com.zamora.lab13.datasource.localsource.CharacterDao
 import com.zamora.lab13.datasource.model.CharacterEntity
 import com.zamora.lab13.datasource.model.mapToModel
 import com.zamora.lab13.datasource.util.DataState
+import com.zamora.lab13.datasource.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -12,19 +13,20 @@ class CharacterRepositoryImpl(
     private val characterDao: CharacterDao,
     private var api: RickAndMortyAPI
 ): CharacterRepository {
-    override fun getAll(): Flow<DataState<List<CharacterEntity>>> = flow {
+
+    override suspend fun getAllCharacters(): Resource<List<CharacterEntity>> {
         val localCharacters = characterDao.getAllCharacters()
         if (localCharacters.isEmpty()){
             try{
                 val remoteCharacters = api.getCharacters().results
                 val charactersToStore = remoteCharacters.map { dto -> dto.mapToModel() }
                 characterDao.insertAll(charactersToStore)
-                emit(DataState.Success(charactersToStore))
+                Resource.Success(charactersToStore)
             }catch (e: Exception){
-                emit(DataState.Error(e))
+                Resource.Error(e.message ?: "")
             }
         } else{
-            emit(DataState.Success(localCharacters))
+            Resource.Success(localCharacters)
         }
     }
 

@@ -1,14 +1,13 @@
 package com.zamora.lab13.datasource.repository
 
 import com.zamora.lab13.datasource.model.CharacterEntity
-import com.zamora.lab13.datasource.util.DataState
+import com.zamora.lab13.datasource.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface CharacterRepository {
-    fun getAll(): Flow<DataState<List<CharacterEntity>>>
-    fun deleteAllCharacters(): Flow<DataState<Int>>
-    fun getCharacter(id: Int): Flow<DataState<CharacterEntity?>>
-    fun updateCharacter(character: CharacterEntity): Flow<DataState<Int>>
-    fun deleteCharacter(id: Int): Flow<DataState<Int>>
-
+    suspend fun getAllCharacters(): Resource<List<CharacterEntity>>
+    suspend fun deleteAllCharacters(): Resource<Unit>
+    suspend fun getCharacter(id: Int): Resource<Character?>
+    suspend fun updateCharacter(character: Character): Resource<Unit>
+    suspend fun deleteCharacter(id: Int): Resource<Unit>
 }
